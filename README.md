@@ -41,6 +41,18 @@ One exercise used `fork()` to create a parent and child process, then used `exec
 
 This is useful analyst knowledge because suspicious Linux activity is often investigated through **process trees, process IDs, command lines and parent/child relationships**.
 
+### Practical evidence — process inspection and termination
+
+![Linux process control](evidence/01-linux-process-control.png)
+
+The terminal evidence shows running processes being enumerated with `ps`, a process terminated using its PID, and the process list checked again to verify the change.
+
+### Practical evidence — process state inspection
+
+![Process state inspection](evidence/04-process-state-inspection.png)
+
+This example shows a stopped process and the use of `ps -f` to inspect its PID, parent PID and process state.
+
 See [linux-process-management.md](docs/linux-process-management.md).
 
 ## Lab 2 — Inter-Process Communication and Synchronisation
@@ -55,6 +67,12 @@ The portfolio included exercises involving:
 The producer/consumer exercise used shared memory and semaphore operations to coordinate two processes accessing a limited buffer.
 
 These are important foundations for understanding how software components interact and why race conditions or poorly controlled shared resources can cause reliability and security issues.
+
+### Practical evidence — producer / consumer shared memory
+
+![Producer consumer shared memory](evidence/06-producer-consumer-shared-memory.png)
+
+This code demonstrates creation of a shared-memory segment, semaphore use and `fork()` to separate producer and consumer execution.
 
 See [ipc-and-synchronisation.md](docs/ipc-and-synchronisation.md).
 
@@ -72,7 +90,23 @@ The server code demonstrated:
 - receiving data with `recv()`
 - returning data with `send()`
 
+### Practical evidence — TCP server socket workflow
+
+![TCP server listening code](evidence/07-tcp-server-listening-code.png)
+
+The server-side code shows address configuration, `bind()`, `listen()` and the logic used to wait for incoming TCP connections.
+
 See [tcp-server-foundations.md](docs/tcp-server-foundations.md).
+
+## Additional Evidence
+
+The `evidence/` folder also contains supporting screenshots for:
+
+- background execution using `nohup`
+- semaphore-controlled critical sections
+- further Linux process-control activity
+
+These are retained as supporting evidence without overloading the main README.
 
 ## Security Analyst Interpretation
 
@@ -122,8 +156,15 @@ The repository intentionally preserves the scope of the original coursework rath
 ```text
 .
 ├── README.md
-└── docs/
-    ├── linux-process-management.md
-    ├── ipc-and-synchronisation.md
-    └── tcp-server-foundations.md
+├── docs/
+│   ├── linux-process-management.md
+│   ├── ipc-and-synchronisation.md
+│   └── tcp-server-foundations.md
+└── evidence/
+    ├── 01-linux-process-control.png
+    ├── 02-background-nohup-job.png
+    ├── 04-process-state-inspection.png
+    ├── 05-semaphore-critical-section.png
+    ├── 06-producer-consumer-shared-memory.png
+    └── 07-tcp-server-listening-code.png
 ```
